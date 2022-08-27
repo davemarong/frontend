@@ -7,13 +7,7 @@
     <title>Products</title>
   </head>
   <body>
-    <header>
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./products.html">Products</a></li>
-        <li><a href="./cart.html">Cart</a></li>
-      </ul>
-    </header>
+    <header class="nav"></header>
     <main>
       <section>
         <label>
@@ -23,15 +17,33 @@
             type="text"
             placeholder="Search for a product..."
           />
-          <button class="filter_button">Update</button>
         </label>
       </section>
+      <button class="editProducts_button">Edit products</button>
       <section class="products_container"></section>
+      <section class="addProduct">
+        <div>
+          <label>Title <input class="addProduct_title" type="text" /> </label>
+          <label
+            >Description
+            <input class="addProduct_description" type="text" /> </label
+          ><label>Price <input class="addProduct_price" type="number" /> </label
+          ><label
+            >Featured<input class="addProduct_featured" type="checkbox" />
+          </label>
+          ><label
+            >Image URL<input class="addProduct_imageUrl" type="text" />
+          </label>
+        </div>
+        <p class="addProduct_message"></p>
+        <button class="addProduct_button">Save product</button>
+      </section>
     </main>
     <script
       src="./js/productsPage.js"
       src="./js/utils.js"
       src="./js/constants.js"
+      src="./js/addProduct.js"
       type="module"
     ></script>
   </body>
