@@ -1,6 +1,6 @@
-# Framework CA
+# Semester Project 2
 
-![image](https://github.com/davemarong/frameworkCaFrontEnd/blob/dev/images/Screenshot%202023-03-10%20at%2021.29.43.png)
+![image](https://github.com/davemarong/frontend/blob/readme/images/code.png)
 
 This website was created as a school project.
 
@@ -14,9 +14,7 @@ The requirements were:
 
 ## Built With
 
-- [React.js](https://reactjs.org/)
-- [Strapi](https://strapi.io/)
-- [MUI](https://mui.com/)
+- [Js](https://www.javascript.com/)
 
 ## Getting Started
 
