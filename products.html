@@ -4,39 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Raleway:wght@200&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Products</title>
   </head>
   <body>
-    <header class="nav"></header>
+    <header class="nav_container"></header>
     <main>
-      <section>
-        <label>
-          Search
-          <input
-            class="searchfield"
-            type="text"
-            placeholder="Search for a product..."
-          />
+      <div class="searchfield">
+        <label class="searchfield_label" for="searchfield_input">
+          Search for a product
         </label>
-      </section>
-      <button class="editProducts_button">Edit products</button>
+        <input
+          class="searchfield_input"
+          id="searchfield_input"
+          type="text"
+          placeholder="Red shoe...."
+        />
+      </div>
+      <div class="editProducts_editButton_container">
+        <button class="editProducts_editButton">Edit products</button>
+      </div>
       <section class="products_container"></section>
-      <section class="addProduct">
-        <div>
-          <label>Title <input class="addProduct_title" type="text" /> </label>
-          <label
-            >Description
-            <input class="addProduct_description" type="text" /> </label
-          ><label>Price <input class="addProduct_price" type="number" /> </label
-          ><label
-            >Featured<input class="addProduct_featured" type="checkbox" />
-          </label>
-          ><label
-            >Image URL<input class="addProduct_imageUrl" type="text" />
-          </label>
+      <section class="addProduct_container">
+        <h3 class="addProduct_header">Add a new product</h3>
+        <div class="addProduct_form">
+          <div class="addProduct_inputfield">
+            <label>Title </label>
+            <input class="addProduct_title" type="text" />
+          </div>
+          <div class="addProduct_inputfield">
+            <label>Description </label>
+            <input class="addProduct_description" type="text" />
+          </div>
+          <div class="addProduct_inputfield">
+            <label>Price </label>
+            <input class="addProduct_price" type="number" />
+          </div>
+          <div class="addProduct_inputfield">
+            <label> Image URL </label>
+            <input class="addProduct_imageUrl" type="text" />
+          </div>
+          <div class="addProduct_featured_container">
+            <div class="addProduct_featured_inputfield">
+              <label>Featured </label>
+              <input class="addProduct_featured" type="checkbox" />
+            </div>
+            <button class="addProduct_saveButton">Add product</button>
+          </div>
         </div>
         <p class="addProduct_message"></p>
-        <button class="addProduct_button">Save product</button>
       </section>
     </main>
     <script

@@ -37,7 +37,7 @@ export const displayCart = () => {
     loopThroughProducts(cart, cartContainer);
     return cart;
   }
-  cartContainer.textContent = "You have no item in the cart...";
+  cartContainer.innerHTML = "<h1>You have no item in the cart...</h1>";
   return cart;
 };
 
@@ -48,18 +48,19 @@ export const displayProductDetails = (product) => {
   let productContainer_element = document.querySelector(".product_container");
   const imgUrl = baseUrl + product.image.url;
   productContainer_element.innerHTML = `
-  <ul>
-    <li>${product.title}</li>
-    <img src=${imgUrl} width="200px"/>
-    <li>${product.description}</li>
-    <li>${product.price}</li>
-    <button>Add to cart</button>
-    
-  </ul>
+  <div class="product display_product_container">
+    <h1 class="product_title">${product.title}</h1>
+    <img class="product_image" src=${imgUrl} width="200px"/>
+    <p class="product_description">${product.description}</p>
+    <p class="product_price">Price: <b>${product.price}kr</b></p>
+    <button class="product_cartButton">Add/remove from cart</button>
+  </div>
   `;
-  document.querySelector("ul button").addEventListener("click", () => {
-    toggleCart(product);
-  });
+  document
+    .querySelector(".product_cartButton")
+    .addEventListener("click", () => {
+      toggleCart(product);
+    });
 };
 
 // LOCAL STORAGE / CART
@@ -129,15 +130,16 @@ export const loopThroughProducts = (products, element) => {
       ? baseUrl + products[i].image?.url
       : products[i].image_url;
     element.innerHTML += `
-            <li data-id="${products[i].id}">
-              <img data-id="${products[i].id}" src=${imgUrl} width="100px"/>
-              ${products[i].title}
-              ${products[i].price}
+            <li class="product" >
+              <img class="product_image" data-id="${products[i].id}" src=${imgUrl} width="200px"/>
+              <p class="product_title">${products[i].title}</p>
+              <p class="product_price">${products[i].price}kr</p>
+              <button data-id="${products[i].id}" class="product_button">Details</button>
             </li>
             `;
   }
   document
-    .querySelectorAll("li")
+    .querySelectorAll("li .product_button")
     .forEach((product) => product.addEventListener("click", goToPage));
 };
 export const loopThroughProductsEditMode = (products, element) => {
@@ -148,17 +150,43 @@ export const loopThroughProductsEditMode = (products, element) => {
       ? baseUrl + products[i].image?.url
       : products[i].image_url;
     element.innerHTML += `
-            <li class=editProduct_${products[i].id}>
-              <img src=${imgUrl} width="100px"/>
-              <input class="editProduct_title" type="text" value="${products[i].title}" />
-              <input class="editProduct_description" type="text" value="${products[i].description}" />
-              <input class="editProduct_price" type="number" value="${products[i].price}" />
-              <input class="editProduct_imageUrl" type="text" value="${products[i].image?.url}" />
-              <input class="editProduct_featured" type="checkbox" value="${products[i].featured}" />
+            <li class="editProduct_${products[i].id} product editProduct">
+              <img class="editProduct_image" src=${imgUrl} width="200px"/>
+              <div class="editProduct_form">
+              <div>
+                <label for="title"> Title:
+                </label>
+                <input id="title" class="editProduct_title" type="text" value="${products[i].title}" />
+              </div>
+              <div>
+                <label for="description"> Description:
+                </label>
+                <textarea id="description" class="editProduct_description" rows="5">${products[i].description}
+                </textarea>
+              </div>
+              <div>
+                <label for="price"> Price:
+                </label>
+                <input id="price" class="editProduct_price" type="number" value="${products[i].price}" />
+              </div>
+              <div>
+                <label for="imgUrl"> Image url:
+                </label>
+                <input id="imgUrl" class="editProduct_imageUrl" type="text" value="${products[i].image?.url}" />
+              </div>
+              <div class="editProduct_featured-container">
+                <label for="featured"> Featured: 
+                </label>
+                <input id="featured" class="editProduct_featured" type="checkbox" value="${products[i].featured}" />
+              </div>
+              </div>
+              <div class="editProduct_button-container">
+                <button class="editProduct_deleteButton" data-id="${products[i].id}">Delete</button>
+                <button data-id="${products[i].id}" class="editProduct_saveButton">Save</button>
+              </div>
             </li>
-            <button class="editProduct_deleteButton" data-id="${products[i].id}">Delete product</button>
             <p class="editProduct_message"></p>
-            <button data-id="${products[i].id}" class="editProduct_saveButton">Save</button>
+            <hr class="editProduct_hr">
             `;
   }
   document
@@ -214,7 +242,9 @@ export const calculateCartPrice = (cart) => {
 export const displayCartPrice = (cart) => {
   const price = calculateCartPrice(cart);
   let cartPrice = document.querySelector(".total_price");
-  cartPrice.textContent = `${price}`;
+  if (price > 0) {
+    cartPrice.textContent = `The total price is: ${price}kr`;
+  }
 };
 
 export const displayMessage = (text, selector) => {
@@ -367,9 +397,12 @@ export const logOut = () => {
 };
 export const createMenu = () => {
   const loggedIn = getLoggedIn();
-  const nav = document.querySelector(".nav");
+  const nav = document.querySelector(".nav_container");
   nav.innerHTML = `
-    <ul>
+    <div class="logo">
+      <img src="/frontend/images/shoeprint.svg" height="50px" />
+    </div>
+    <ul class="nav">
       <li>
         <a href="./index.html">Home</a>
       </li>
@@ -393,6 +426,18 @@ export const createMenu = () => {
       `
       }
     </ul>
+    <a class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
     `;
   document.querySelector(".logOut")?.addEventListener("click", logOut);
+  document.querySelector(".icon").addEventListener("click", toggleMenu);
+};
+export const toggleMenu = () => {
+  let nav = document.querySelector(".nav");
+  if (nav.style.maxHeight === "300px") {
+    nav.style.maxHeight = "0px";
+  } else {
+    nav.style.maxHeight = "300px";
+  }
 };
